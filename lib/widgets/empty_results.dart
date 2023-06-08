@@ -16,12 +16,12 @@ class EmptyResultsWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             iconPath,
-            width: 80,
+            width: 60,
           ),
           const SizedBox(height: 15),
           Text(
             title,
-            style: const TextStyle(fontSize: 18, color: metakGrey),
+            style: const TextStyle(fontSize: 16, color: metakGrey),
           ),
         ],
       ),

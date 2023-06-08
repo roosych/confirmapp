@@ -8,7 +8,7 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.2),
         const EmptyResultsWidget(
           title: 'Bildirişlər yoxdur',
           iconPath: 'asset/images/notify.svg',

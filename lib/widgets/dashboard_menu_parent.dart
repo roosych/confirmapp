@@ -17,7 +17,7 @@ class DashboardMenuParentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 16),
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(

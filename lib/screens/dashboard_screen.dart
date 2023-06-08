@@ -170,18 +170,18 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
           ],
         ),
         DashboardMenuItem(
-          count: 12,
-          title: 'Məzuniyyət',
-          routeName: '/vacations',
-          iconPath: 'asset/images/holiday.svg',
-          showBadge: true,
-        ),
-        DashboardMenuItem(
           count: null,
           title: 'Balans',
           routeName: '/balance',
           iconPath: 'asset/images/safe.svg',
           showBadge: false,
+        ),
+        DashboardMenuItem(
+          count: 12,
+          title: 'Məzuniyyət',
+          routeName: '/vacations',
+          iconPath: 'asset/images/holiday.svg',
+          showBadge: true,
         ),
         DashboardMenuItem(
           count: null,
