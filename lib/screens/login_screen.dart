@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:test_app/styles.dart';
+import 'package:test_app/widgets/metak_gradient_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,9 +12,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController persid = TextEditingController(text: '100641');
+  TextEditingController pincode = TextEditingController(text: 'password');
+  // Initially password is obscure
+  bool _obscureText = true;
+
+  // Toggles the password show status
+  void _togglePassword() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff7f7f7),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -22,36 +37,97 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               SvgPicture.asset(
                 'asset/images/logo.svg',
-                width: 165,
+                width: 175,
               ),
               const SizedBox(height: 60),
               TextFormField(
+                controller: persid,
                 cursorColor: metakRed,
                 maxLength: 6,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade200),
-                  ),
-                  counterText: "",
-                  filled: true,
-                  hintText: 'Şəxsi İD',
                   fillColor: Colors.white,
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
+                  filled: true,
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(120, 165, 165, 162), width: 0.0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: metakGrey, width: 0.0),
+                  ),
+                  errorStyle: const TextStyle(height: 0),
+                  hintStyle: const TextStyle(
+                    color: metakGrey,
+                  ),
+                  border: const OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.only(
+                    top: 10,
+                  ),
+                  hintText: 'ID',
+                  counterText: "",
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: SvgPicture.asset(
+                      'asset/images/fingerprint.svg',
+                      width: 20,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              const SizedBox(height: 30),
-              MaterialButton(
-                elevation: 0,
-                padding: const EdgeInsets.all(12),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                color: metakGrey,
-                onPressed: showSnackBar,
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: pincode,
+                obscureText: _obscureText,
+                cursorColor: metakRed,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(120, 165, 165, 162), width: 0.0),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: metakGrey, width: 0.0),
+                  ),
+                  errorStyle: const TextStyle(height: 0),
+                  hintStyle: const TextStyle(
+                    color: metakGrey,
+                  ),
+                  border: const OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.only(
+                    top: 10,
+                  ),
+                  hintText: 'Şifrə',
+                  counterText: "",
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: SvgPicture.asset(
+                      'asset/images/lock.svg',
+                      width: 20,
+                    ),
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: _togglePassword,
+                    child: Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: SvgPicture.asset(
+                        _obscureText
+                            ? 'asset/images/eye.svg'
+                            : 'asset/images/show.svg',
+                        width: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 50),
+              MetakGradientButton(
+                width: MediaQuery.of(context).size.width,
+                onPressed: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardScreen()),
+                ),
                 child: const Text(
                   "Daxil ol",
                   style: TextStyle(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/routes/routes.dart';
-import 'package:test_app/screens/dashboard_screen.dart';
+//import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:test_app/screens/login_screen.dart';
 
 Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +25,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         dividerColor: Colors.transparent,
         fontFamily: 'Montserrat',
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionHandleColor: Colors.transparent,
+        ),
         useMaterial3: true,
       ),
-      home: const DashboardScreen(),
+      home: const LoginScreen(),
       routes: routes,
     );
   }
