@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:test_app/screens/dashboard_screen.dart';
+//import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:test_app/styles.dart';
 import 'package:test_app/widgets/metak_gradient_button.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fillColor: Colors.white,
                   filled: true,
                   enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
                     borderSide: BorderSide(
                         color: Color.fromARGB(120, 165, 165, 162), width: 0.0),
                   ),
@@ -61,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   border: const OutlineInputBorder(),
                   contentPadding: const EdgeInsets.only(
-                    top: 10,
+                    top: 0,
                   ),
                   hintText: 'ID',
                   counterText: "",
@@ -83,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fillColor: Colors.white,
                   filled: true,
                   enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
                     borderSide: BorderSide(
                         color: Color.fromARGB(120, 165, 165, 162), width: 0.0),
                   ),
@@ -95,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   border: const OutlineInputBorder(),
                   contentPadding: const EdgeInsets.only(
-                    top: 10,
+                    top: 0,
                   ),
                   hintText: 'Şifrə',
                   counterText: "",
@@ -123,11 +127,37 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 50),
               MetakGradientButton(
                 width: MediaQuery.of(context).size.width,
-                onPressed: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashboardScreen()),
-                ),
+                // onPressed: () => Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const DashboardScreen()),
+                // ),
+                onPressed: () {
+                  //скрываем програмную клавиатуру
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    const CustomSnackBar.error(
+                      // backgroundColor: metakRed,
+                      boxShadow: [],
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      message: 'Şəxsi İD və ya şifrə yanlışdır!',
+                      icon: Icon(
+                        Icons.abc_sharp,
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    dismissType: DismissType.onSwipe,
+                    dismissDirection: [DismissDirection.endToStart],
+                  );
+                },
+                // child: const SizedBox(
+                //   height: 25,
+                //   width: 25,
+                //   child: CircularProgressIndicator(
+                //     color: Colors.white,
+                //   ),
+                // ),
                 child: const Text(
                   "Daxil ol",
                   style: TextStyle(
@@ -139,18 +169,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           )),
         ),
-      ),
-    );
-  }
-
-  ScaffoldFeatureController showSnackBar() {
-    return ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        showCloseIcon: true,
-        elevation: 0,
-        backgroundColor: Colors.amber,
-        behavior: SnackBarBehavior.floating,
-        content: Text('data'),
       ),
     );
   }
