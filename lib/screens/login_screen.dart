@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:test_app/styles.dart';
@@ -28,13 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xfff7f7f7),
-      body: SafeArea(
-        child: Padding(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xfff7f7f7),
+        body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Center(
-              child: Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
@@ -43,10 +46,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 60),
               TextFormField(
+                enableInteractiveSelection: false,
                 controller: persid,
                 cursorColor: metakRed,
                 maxLength: 6,
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: true, decimal: true),
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -167,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ],
-          )),
+          ),
         ),
       ),
     );

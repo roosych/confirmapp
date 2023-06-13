@@ -31,7 +31,7 @@ class ProcurementRequestDept extends StatelessWidget {
         title: Text(
           requestsData['dept'],
           overflow: TextOverflow.fade,
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
         ),
       ),
       body: SafeArea(

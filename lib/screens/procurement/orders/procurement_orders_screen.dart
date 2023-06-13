@@ -47,7 +47,7 @@ class ProcurementOrdersScreen extends StatelessWidget {
           'Satınalma sifarişləri',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 22,
+            fontSize: 20,
           ),
         ),
       ),
@@ -144,7 +144,10 @@ class ProcurementOrdersScreen extends StatelessWidget {
                       );
                     },
                   )
-                : const EmptyResultsWidget(title: 'Satınalma sifarişləri yoxdur', iconPath: 'asset/images/empty.svg',),
+                : const EmptyResultsWidget(
+                    title: 'Satınalma sifarişləri yoxdur',
+                    iconPath: 'asset/images/empty.svg',
+                  ),
           ),
         ),
       ),

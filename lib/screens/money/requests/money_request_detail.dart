@@ -30,7 +30,7 @@ class MoneyRequestDetail extends StatelessWidget {
           'Pul tələbi',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 22,
+            fontSize: 20,
           ),
         ),
       ),
@@ -77,7 +77,7 @@ class MoneyRequestDetail extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
+              padding: const EdgeInsets.only(bottom: 40, left: 5, right: 5),
               child: Row(
                 children: <Widget>[
                   const SizedBox(width: 10),

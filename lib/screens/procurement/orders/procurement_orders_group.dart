@@ -33,7 +33,7 @@ class ProcurementOrdersGroup extends StatelessWidget {
           overflow: TextOverflow.fade,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 22,
+            fontSize: 20,
           ),
         ),
       ),

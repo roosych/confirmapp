@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/routes/routes.dart';
-//import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:test_app/screens/login_screen.dart';
+import 'package:test_app/screens/dashboard_screen.dart';
+//import 'package:test_app/screens/login_screen.dart';
 
 Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const DashboardScreen(),
       routes: routes,
     );
   }

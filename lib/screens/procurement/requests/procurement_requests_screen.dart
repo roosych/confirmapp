@@ -63,7 +63,7 @@ class ProcurementRequestsScreen extends StatelessWidget {
           'Satınalma tələbləri',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 22,
+            fontSize: 20,
           ),
         ),
       ),

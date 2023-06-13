@@ -31,7 +31,7 @@ class MoneyRequestAmount extends StatelessWidget {
         title: Text(
           requestsData['amount_title'],
           overflow: TextOverflow.fade,
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
         ),
       ),
       body: SafeArea(

@@ -125,14 +125,14 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Salam, User!',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 20),
+        // Text(
+        //   'Salam, User!',
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.w500,
+        //     fontSize: 20,
+        //   ),
+        // ),
+        // SizedBox(height: 20),
         DashboardMenuParentWidget(
           image: 'asset/images/notes.svg',
           title: 'Satınalma',
