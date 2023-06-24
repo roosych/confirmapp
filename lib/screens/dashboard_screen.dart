@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:test_app/screens/notifications_screen.dart';
+import 'package:test_app/screens/notifications_settings_screen.dart';
 import 'package:test_app/styles.dart';
 import 'package:test_app/widgets/dashboard_menu_child.dart';
 import 'package:test_app/widgets/dashboard_menu_item.dart';
@@ -27,10 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   static final List<Widget> _bottomMenuItems = <Widget>[
     const DashboardMenuWidget(),
-    const Text(
-      'Profil',
-    ),
-    const NotificationsScreen(),
+    const NotificationSettingsScreen(),
   ];
 
   @override
@@ -44,34 +43,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
           'asset/images/logo.svg',
           width: 165,
         ),
-        // leading: Builder(
-        //   builder: (context) => IconButton(
-        //     splashColor: Colors.transparent,
-        //     highlightColor: Colors.transparent,
-        //     hoverColor: Colors.transparent,
-        //     icon: const Icon(
-        //       Boxicons.bx_menu_alt_left,
-        //       color: Colors.grey,
-        //       size: 30,
-        //     ),
-        //     onPressed: () => Scaffold.of(context).openDrawer(),
-        //   ),
-        // ),
-        // actions: [
-        //   IconButton(
-        //     splashColor: Colors.transparent,
-        //     highlightColor: Colors.transparent,
-        //     hoverColor: Colors.transparent,
-        //     icon: const Icon(
-        //       Boxicons.bx_bell,
-        //       color: Colors.grey,
-        //       size: 30,
-        //     ),
-        //     onPressed: () => Scaffold.of(context).openDrawer(),
-        //   ),
-        // ],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  title: const Text(
+                    'Çıxış etməyə əminsiniz?',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'Xeyr',
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => print('Logout process...'),
+                      child: const Text(
+                        'Bəli',
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              icon: SvgPicture.asset(
+                'asset/images/logout.svg',
+                width: 22,
+              ),
+            ),
+          ),
+        ],
       ),
-      //drawer: const DrawerWidget(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
@@ -100,9 +109,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: Boxicons.bxs_dashboard,
           ),
           TabItem(
-            icon: Boxicons.bx_user,
-          ),
-          TabItem(
             icon: Boxicons.bx_bell,
           ),
         ],
@@ -125,15 +131,16 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   'Salam, User!',
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.w500,
-        //     fontSize: 20,
-        //   ),
-        // ),
-        // SizedBox(height: 20),
+        SizedBox(height: 10),
+        Text(
+          'Salam, Aydın Kərimov!',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+        SizedBox(height: 20),
+
         DashboardMenuParentWidget(
+          count: 13,
+          showBadge: true,
           image: 'asset/images/notes.svg',
           title: 'Satınalma',
           childWidgets: [
@@ -152,6 +159,8 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
           ],
         ),
         DashboardMenuParentWidget(
+          count: 19,
+          showBadge: true,
           image: 'asset/images/money-bag.svg',
           title: 'Pul',
           childWidgets: [
@@ -162,7 +171,7 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
               showBadge: true,
             ),
             DashboardMenuChildWidget(
-              title: 'Xərc',
+              title: 'Xərclər',
               count: 17,
               routeName: '/money-spending',
               showBadge: true,
@@ -172,24 +181,24 @@ class _DashboardMenuWidgetState extends State<DashboardMenuWidget> {
         DashboardMenuItem(
           count: null,
           title: 'Balans',
-          routeName: '/balance',
+          routeName: 'balance',
           iconPath: 'asset/images/safe.svg',
           showBadge: false,
         ),
-        DashboardMenuItem(
-          count: 12,
-          title: 'Məzuniyyət',
-          routeName: '/vacations',
-          iconPath: 'asset/images/holiday.svg',
-          showBadge: true,
-        ),
-        DashboardMenuItem(
-          count: null,
-          title: 'ƏH təsdiqi',
-          routeName: '/salary',
-          iconPath: 'asset/images/salary2.svg',
-          showBadge: false,
-        ),
+        // DashboardMenuItem(
+        //   count: 12,
+        //   title: 'Отпуска',
+        //   routeName: '/vacations',
+        //   iconPath: 'asset/images/holiday.svg',
+        //   showBadge: true,
+        // ),
+        // DashboardMenuItem(
+        //   count: null,
+        //   title: 'Зарплата',
+        //   routeName: '/salary',
+        //   iconPath: 'asset/images/salary2.svg',
+        //   showBadge: false,
+        // ),
       ],
     );
   }

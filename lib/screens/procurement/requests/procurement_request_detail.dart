@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test_app/models/procurement/procurement_request_model.dart';
 import 'package:test_app/styles.dart';
 import 'package:test_app/widgets/metak_button.dart';
 import 'package:test_app/widgets/rich_text.dart';
@@ -7,10 +8,10 @@ import 'package:test_app/widgets/rich_text.dart';
 class ProcurementRequestDetail extends StatelessWidget {
   const ProcurementRequestDetail({
     super.key,
-    required this.requestsData,
+    required this.procurementRequest,
   });
 
-  final Map<String, dynamic> requestsData;
+  final ProcurementRequest procurementRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -42,45 +43,48 @@ class ProcurementRequestDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomRichTextWidget(
-                    title: 'Mərhələ', text: requestsData['step']),
+                    title: 'Mərhələ', text: procurementRequest.step),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
-                    title: 'Tələb tipi', text: requestsData['type']),
+                    title: 'Tələb tipi', text: procurementRequest.type),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
                     title: 'Tələb nömrəsi',
-                    text: requestsData['number'].toString()),
+                    text: procurementRequest.requestNumber.toString()),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
-                    title: 'Material', text: requestsData['material_code']),
+                    title: 'Material',
+                    text: procurementRequest.materialCode.toString()),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
                     title: 'Material adı',
-                    text: requestsData['material_title']),
+                    text: procurementRequest.materialTitle),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     CustomRichTextWidget(
                         title: 'Miqdar',
-                        text: requestsData['quantity'].toString()),
+                        text: procurementRequest.quantity.toString()),
                     const SizedBox(width: 10),
                     CustomRichTextWidget(
-                        title: 'Vahid', text: requestsData['unit']),
+                        title: 'Vahid', text: procurementRequest.unit),
                   ],
                 ),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
-                    title: 'Ehtiyac tarixi', text: requestsData['date']),
+                    title: 'Ehtiyac tarixi', text: procurementRequest.date),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
-                    title: 'Tələb sahibi', text: requestsData['owner']),
-                const SizedBox(height: 10),
-                CustomRichTextWidget(title: 'Şöbə', text: requestsData['dept']),
+                    title: 'Tələb sahibi', text: procurementRequest.owner),
                 const SizedBox(height: 10),
                 CustomRichTextWidget(
-                    title: 'Tələbi yaradan', text: requestsData['creator']),
+                    title: 'Şöbə', text: procurementRequest.department),
                 const SizedBox(height: 10),
-                CustomRichTextWidget(title: 'Qeyd', text: requestsData['note']),
+                CustomRichTextWidget(
+                    title: 'Tələbi yaradan', text: procurementRequest.creator),
+                const SizedBox(height: 10),
+                CustomRichTextWidget(
+                    title: 'Qeyd', text: procurementRequest.note),
               ],
             ),
           ),

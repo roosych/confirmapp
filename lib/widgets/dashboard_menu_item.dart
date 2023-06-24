@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:badges/badges.dart' as badges;
@@ -41,10 +40,7 @@ class DashboardMenuItem extends StatelessWidget {
           splashColor: Colors.grey.withOpacity(0.1),
           borderRadius: br8,
           onTap: () {
-            //Navigator.pushNamed(context, routeName);
-            if (kDebugMode) {
-              print(routeName);
-            }
+            Navigator.pushNamed(context, routeName);
           },
           child: Padding(
             padding:

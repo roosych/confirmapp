@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:test_app/models/procurement/procurement_request_model.dart';
 import 'package:test_app/screens/procurement/requests/procurement_request_dept.dart';
 import 'package:test_app/styles.dart';
 import 'package:test_app/widgets/empty_results.dart';
@@ -8,41 +9,35 @@ import 'package:test_app/widgets/empty_results.dart';
 class ProcurementRequestsScreen extends StatelessWidget {
   ProcurementRequestsScreen({super.key});
 
-  final List<Map<String, dynamic>> requestsData = [
-    {
-      'id': 1,
-      'step': 'Rəhbərlik',
-      'type': 'Cari qulluq və avadanlıq təmiri',
-      'number': '021545',
-      'material_code': '12345',
-      'material_title': 'Tros 024',
-      'quantity': 77,
-      'unit': 'M',
-      'date': '02.03.2023',
-      'owner': 'Hakim Sarıyev',
-      'dept': 'Mühəndislik şöbəsi',
-      'creator': 'İmanquli İmanquliyev',
-      'note': 'KP 300kranı üçün',
-      //временное свойство count
-      'count': 1,
-    },
-    {
-      'id': 2,
-      'step': 'Rəhbərlik',
-      'type': 'Cari qulluq və avadanlıq təmiri',
-      'number': '032548',
-      'material_code': '45876',
-      'material_title': 'Kartric',
-      'quantity': 1,
-      'unit': 'ƏD',
-      'date': '02.03.2023',
-      'owner': 'Sergey Yejov',
-      'dept': 'İnformasiya Texnoloqiyaları Departamenti',
-      'creator': 'Seymur Şirinov',
-      'note': 'Canon printeri üçün kartric dəsti',
-      //временное свойство count
-      'count': 1,
-    },
+  final List<ProcurementRequest> procurementRequests = [
+    ProcurementRequest(
+        1,
+        'Rəhbərlik',
+        'Cari qulluq və avadanlıq təmiri',
+        021545,
+        12345,
+        'Tros 024',
+        33,
+        'M',
+        '02.03.2023',
+        'Hakim Sarıyev',
+        'Energetika departamenti',
+        'İmanquli İmanquliyev',
+        'KP 300kranı üçün'),
+    ProcurementRequest(
+        2,
+        'Rəhbərlik',
+        'Cari qulluq və avadanlıq təmiri',
+        032548,
+        45876,
+        'Kartric',
+        1,
+        'ƏD',
+        '02.03.2023',
+        'Sergey Yejov',
+        'İnformasiya Texnoloqiyaları Departamenti',
+        'Seymur Şirinov',
+        'Canon printeri üçün kartric dəsti')
   ];
 
   @override
@@ -72,9 +67,9 @@ class ProcurementRequestsScreen extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: requestsData.isNotEmpty
+            child: procurementRequests.isNotEmpty
                 ? ListView.builder(
-                    itemCount: requestsData.length,
+                    itemCount: procurementRequests.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 14),
@@ -82,13 +77,12 @@ class ProcurementRequestsScreen extends StatelessWidget {
                           splashColor: metakGrey.withOpacity(0.1),
                           borderRadius: br8,
                           onTap: () {
-                            // Navigator.pushNamed(
-                            //     context, '/procurement-request-dept');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ProcurementRequestDept(
-                                  requestsData: requestsData[index],
+                                  procurementRequest:
+                                      procurementRequests[index],
                                 ),
                               ),
                             );
@@ -115,7 +109,7 @@ class ProcurementRequestsScreen extends StatelessWidget {
                                 children: [
                                   Flexible(
                                     child: Text(
-                                      requestsData[index]['dept'],
+                                      procurementRequests[index].department,
                                       overflow: TextOverflow.fade,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w500,
@@ -128,9 +122,10 @@ class ProcurementRequestsScreen extends StatelessWidget {
                                     position: badges.BadgePosition.topEnd(
                                         top: -12, end: -12),
                                     showBadge: true,
-                                    badgeContent: Text(
-                                      requestsData[index]['count'].toString(),
-                                      style: const TextStyle(
+                                    badgeContent: const Text(
+                                      //requestsData[index]['count'].toString(),
+                                      '3',
+                                      style: TextStyle(
                                           fontSize: 18, color: Colors.white),
                                     ),
                                     badgeAnimation:
