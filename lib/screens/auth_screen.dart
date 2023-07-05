@@ -1,6 +1,9 @@
+import 'dart:io';
+
+import 'package:android_id/android_id.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:test_app/screens/dashboard_screen.dart';
 import 'package:test_app/styles.dart';
@@ -8,16 +11,18 @@ import 'package:test_app/widgets/metak_gradient_button.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController persid = TextEditingController(text: '100641');
-  TextEditingController pincode = TextEditingController(text: 'password');
+class _AuthScreenState extends State<AuthScreen> {
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  String? _deviceId;
+
   // Initially password is obscure
   bool _obscureText = true;
 
@@ -26,6 +31,54 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getDeviceId();
+  }
+
+  void _getDeviceId() async {
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    String? deviceId;
+
+    if (Platform.isAndroid) {
+      const androidId = AndroidId();
+      deviceId = await androidId.getId();
+    } else if (Platform.isIOS) {
+      final iosInfo = await deviceInfo.iosInfo;
+      deviceId = iosInfo.identifierForVendor;
+    }
+
+    setState(() {
+      _deviceId = deviceId;
+    });
+  }
+
+  void _auth() {
+    final username = _username.text;
+    final password = _password.text;
+    if (username == '100641' && password == '100641') {
+      Navigator.of(context).pushReplacementNamed('/dashboard');
+    } else {
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.error(
+          // backgroundColor: metakRed,
+          boxShadow: [],
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          message: 'Şəxsi İD və ya şifrə yanlışdır!',
+          icon: Icon(
+            Icons.abc_sharp,
+            color: Colors.transparent,
+          ),
+        ),
+        dismissType: DismissType.onSwipe,
+        dismissDirection: [DismissDirection.endToStart],
+      );
+    }
+    setState(() {});
   }
 
   @override
@@ -47,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 60),
               TextFormField(
                 enableInteractiveSelection: false,
-                controller: persid,
+                controller: _username,
                 cursorColor: metakRed,
                 maxLength: 6,
                 keyboardType: const TextInputType.numberWithOptions(
@@ -85,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                controller: pincode,
+                controller: _password,
                 obscureText: _obscureText,
                 cursorColor: metakRed,
                 decoration: InputDecoration(
@@ -133,30 +186,35 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 50),
               MetakGradientButton(
                 width: MediaQuery.of(context).size.width,
-                // onPressed: () => Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const DashboardScreen()),
-                // ),
                 onPressed: () {
-                  //скрываем програмную клавиатуру
                   FocusScope.of(context).requestFocus(FocusNode());
-                  showTopSnackBar(
-                    Overlay.of(context),
-                    const CustomSnackBar.error(
-                      // backgroundColor: metakRed,
-                      boxShadow: [],
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      message: 'Şəxsi İD və ya şifrə yanlışdır!',
-                      icon: Icon(
-                        Icons.abc_sharp,
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    dismissType: DismissType.onSwipe,
-                    dismissDirection: [DismissDirection.endToStart],
-                  );
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const DashboardScreen(),
+                  //   ),
+                  // );
+                  _auth();
                 },
+                // onPressed: () {
+                //   //скрываем програмную клавиатуру
+                //   FocusScope.of(context).requestFocus(FocusNode());
+                //   showTopSnackBar(
+                //     Overlay.of(context),
+                //     const CustomSnackBar.error(
+                //       // backgroundColor: metakRed,
+                //       boxShadow: [],
+                //       borderRadius: BorderRadius.all(Radius.circular(8)),
+                //       message: 'Şəxsi İD və ya şifrə yanlışdır!',
+                //       icon: Icon(
+                //         Icons.abc_sharp,
+                //         color: Colors.transparent,
+                //       ),
+                //     ),
+                //     dismissType: DismissType.onSwipe,
+                //     dismissDirection: [DismissDirection.endToStart],
+                //   );
+                // },
                 // child: const SizedBox(
                 //   height: 25,
                 //   width: 25,
@@ -172,6 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white),
                 ),
               ),
+              Text('$_deviceId'),
             ],
           ),
         ),

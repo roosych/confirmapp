@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/routes/routes.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:test_app/screens/dashboard_screen.dart';
-//import 'package:test_app/screens/login_screen.dart';
+import 'package:test_app/screens/auth_screen.dart';
 
 Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await Future.delayed(const Duration(seconds: 0));
+  //await Future.delayed(const Duration(seconds: 0));
 
   runApp(const MyApp());
   // whenever your initialization is completed, remove the splash screen:
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const DashboardScreen(),
+      home: const AuthScreen(),
       routes: routes,
     );
   }
