@@ -8,7 +8,9 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_app/logging.dart';
+import 'package:test_app/main_config.dart';
 
 import 'api_error.dart';
 
@@ -43,6 +45,11 @@ class DioInterceptors {
       ),
       InterceptorsWrapper(
         onRequest: (requestOptions, requestHandler) async {
+          final localStorage = await SharedPreferences.getInstance();
+          if (localStorage.containsKey(MainConfig.tokenKey)) {
+            final token = localStorage.getString(MainConfig.tokenKey);
+            requestOptions.headers['TransactionId'] = '$token';
+          }
           requestOptions.headers['User-Agent'] = await _getUserAgent();
           return requestHandler.next(requestOptions);
         },
@@ -69,7 +76,7 @@ class DioInterceptors {
                     map = json.decode(response.data) as Map<String, dynamic>;
                   } catch (e, st) {
                     _logger.severe(
-                      'An error occurred while parsing error response:',
+                      'Error occurred while parsing error response',
                       e,
                       st,
                     );

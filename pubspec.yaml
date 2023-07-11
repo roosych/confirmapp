@@ -38,6 +38,10 @@ dependencies:
   # di
   get_it: ^7.6.0
   injectable: ^2.1.2
+  # json
+  json_annotation: ^4.8.1
+  # local db
+  shared_preferences: ^2.2.0
 
     
 # flutter_native_splash-development.yaml
@@ -63,9 +67,11 @@ dev_dependencies:
   flutter_lints: ^2.0.2
   build_runner: ^2.4.6
   injectable_generator: ^2.1.6
+  json_serializable: ^6.7.0
 
 flutter:
   assets:
+    - asset/env.secret
     - asset/images/
     - asset/translations/
 
