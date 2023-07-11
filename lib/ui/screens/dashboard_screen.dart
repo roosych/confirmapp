@@ -64,7 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => print('Logout process...'),
+                      onPressed: () => Navigator.of(context).pushReplacementNamed('/'),
                       child: const Text(
                         'Bəli',
                         style: TextStyle(fontSize: 16, color: Colors.black),

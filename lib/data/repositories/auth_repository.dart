@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:test_app/data/models/env_config.dart';
@@ -36,7 +38,7 @@ class ApiAuthRepository implements AuthRepository {
       '${_config.serverUrl}/ConfirmationApp/Login/',
       data: params,
     );
-    User? user = response.data != null ? User.fromJson(response.data) : null;
+    User? user = response.data != null ? User.fromJson(jsonDecode(response.data)) : null;
     if (user != null) {
       await _preferencesRepository.saveToken(user.TransactionId);
     }

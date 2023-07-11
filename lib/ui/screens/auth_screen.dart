@@ -59,8 +59,10 @@ class _AuthScreenState extends State<AuthScreen> {
       deviceId = iosId;
     }
 
+    deviceId = 'df66c7133ce48818';
     setState(() {
       _deviceId = deviceId;
+      debugPrint('device id = $deviceId');
     });
   }
 
@@ -228,9 +230,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text('$_deviceId'),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text('$_deviceId'),
+                      ),
                     ),
                   ],
                 ),
