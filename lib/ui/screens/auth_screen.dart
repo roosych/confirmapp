@@ -59,7 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
       deviceId = iosId;
     }
 
-    deviceId = 'df66c7133ce48818';
+    // deviceId = 'df66c7133ce48818';
     setState(() {
       _deviceId = deviceId;
       debugPrint('device id = $deviceId');
