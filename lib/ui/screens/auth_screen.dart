@@ -123,33 +123,33 @@ class _AuthScreenState extends State<AuthScreen> {
                       // keyboardType: const TextInputType.numberWithOptions(
                       //     signed: true, decimal: true),
                       // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           borderSide: BorderSide(
                               color: Color.fromARGB(120, 165, 165, 162),
                               width: 0.0),
                         ),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: metakGrey, width: 0.0),
                         ),
-                        errorStyle: TextStyle(height: 0),
-                        hintStyle: TextStyle(
+                        errorStyle: const TextStyle(height: 0),
+                        hintStyle: const TextStyle(
                           color: metakGrey,
                         ),
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.only(
+                        border: const OutlineInputBorder(),
+                        contentPadding: const EdgeInsets.only(
                           top: 0,
                         ),
                         hintText: 'Login',
                         counterText: "",
                         prefixIcon: Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Icon(
-                            Icons.person,
-                            size: 20,
+                          padding: const EdgeInsets.all(14.0),
+                          child: SvgPicture.asset(
+                            'asset/images/logom.svg',
+                            width: 20,
                           ),
                         ),
                       ),
@@ -207,8 +207,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
                           if (state is AuthProgressState) {
-                            return const SizedBox(
-                                  height: 30.0,
+                            return const SizedBox.square(
+                                  dimension: 30.0,
                                   child: CircularProgressIndicator(),);
                           }
                           return MetakGradientButton(
@@ -228,7 +228,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         },
                       ),
                     ),
-                    Text('$_deviceId'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text('$_deviceId'),
+                    ),
                   ],
                 ),
               ),
